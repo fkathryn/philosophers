@@ -6,7 +6,7 @@
 /*   By: fkathryn <fkathryn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 20:31:12 by fkathryn          #+#    #+#             */
-/*   Updated: 2020/11/16 02:25:53 by fkathryn         ###   ########.fr       */
+/*   Updated: 2020/11/16 19:57:41 by fkathryn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	write_status(t_philos *philo, char *s3)
 	char *str;
 
 	s1 = ft_itoa(get_current_time() - philo->table->start_time);
-	s2 = ft_itoa(philo->init_id);
+	s2 = ft_itoa(philo->philo_id);
 	str = ft_strjoin(s1, s2, s3);
 	free(s1);
 	free(s2);
@@ -34,6 +34,7 @@ void	*start_routine(void *arg)
 	philo = (t_philos*)arg;
 	while (philo->number_of_times_each_philosopher_must_eat != 0)
 	{
+		eating(philo);
 		thinking(philo);
 		sleeping(philo);
 		philo->number_of_times_each_philosopher_must_eat--;

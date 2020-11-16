@@ -6,7 +6,7 @@
 /*   By: fkathryn <fkathryn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 20:41:26 by fkathryn          #+#    #+#             */
-/*   Updated: 2020/11/16 02:30:32 by fkathryn         ###   ########.fr       */
+/*   Updated: 2020/11/16 19:55:43 by fkathryn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ typedef struct			s_table {
 
 typedef struct			s_philos {
 	t_table				*table;
-	int					init_id;
+	int					die;
+	int					philo_id;
 	long				last_eat;
 	int					number_of_times_each_philosopher_must_eat;
 }						t_philos;
@@ -45,12 +46,7 @@ typedef struct			s_philos {
 
 void					sleeping(t_philos *philo);
 void					thinking(t_philos *philo);
-
-/*
-** main.c
-*/
-
-void					write_status(t_philos *philo, char *s3);
+void					eating(t_philos *philo);
 
 /*
 ** init.c
@@ -61,12 +57,19 @@ void					philos_and_forks_init(t_table *table, t_philos *philos);
 void					philo_init(t_philos *philos, int i, t_table *table);
 
 /*
+** main.c
+*/
+
+void					write_status(t_philos *philo, char *s3);
+
+/*
 ** utils.c
 */
 
 long					get_current_time(void);
 void					free_table(t_table *table);
 void					ft_usleep(long sec);
+int						another_fork(int fork_id, int philos);
 
 /*
 ** utils_libft.c

@@ -6,7 +6,7 @@
 /*   By: fkathryn <fkathryn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 23:26:31 by fkathryn          #+#    #+#             */
-/*   Updated: 2020/11/16 02:22:57 by fkathryn         ###   ########.fr       */
+/*   Updated: 2020/11/16 19:53:40 by fkathryn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	philo_init(t_philos *philos, int i, t_table *table)
 {
-	philos->init_id = i;
+	philos->philo_id = i;
 	philos->number_of_times_each_philosopher_must_eat =
 		table->number_of_times_each_philosopher_must_eat;
 	philos->table = table;

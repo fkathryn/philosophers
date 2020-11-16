@@ -6,11 +6,16 @@
 /*   By: fkathryn <fkathryn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 21:00:40 by fkathryn          #+#    #+#             */
-/*   Updated: 2020/11/16 01:35:26 by fkathryn         ###   ########.fr       */
+/*   Updated: 2020/11/16 19:50:48 by fkathryn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
+
+int		another_fork(int fork_id, int philos)
+{
+	return ((fork_id + 1) % philos);
+}
 
 void	ft_usleep(long sec)
 {
