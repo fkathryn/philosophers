@@ -6,7 +6,7 @@
 /*   By: fkathryn <fkathryn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 02:56:14 by fkathryn          #+#    #+#             */
-/*   Updated: 2020/11/20 02:58:45 by fkathryn         ###   ########.fr       */
+/*   Updated: 2020/11/20 21:44:13 by fkathryn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <signal.h>
 
 typedef struct			s_table {
 	int					number_of_philos;
@@ -32,7 +33,8 @@ typedef struct			s_table {
 	sem_t				*sem_time;
 	sem_t				*sem_write;
 	sem_t				*sem_death;
-	sem_t				*sem_waiter;
+	// sem_t				*sem_waiter;
+	sem_t				*sem_philo_died;
 }						t_table;
 
 typedef struct			s_philos {
@@ -41,5 +43,47 @@ typedef struct			s_philos {
 	long				last_eat;
 	int					number_of_times_each_philosopher_must_eat;
 }						t_philos;
+
+/*
+** condition_philo.c
+*/
+
+void					eating(t_philos *philo);
+void					sleeping(t_philos *philo);
+void					thinking(t_philos *philo);
+
+/*
+** check_param.c
+*/
+
+int						print_error(char *str);
+int						check_param(t_table *table);
+
+/*
+** init.c
+*/
+
+int						table_init(t_table *table, char **av);
+void					philo_init(t_philos *philos, int i, t_table *table);
+
+/*
+** libft_utils.c
+*/
+
+size_t					ft_strlen(const char *s);
+char					*ft_itoa(long n);
+char					*ft_strjoin(char *s1, char *s2, char *s3);
+int						ft_atoi(const char *nptr);
+
+/*
+** utils.c
+*/
+
+int						open_semafore(t_table *table);
+void					ft_usleep(long sec);
+void					close_semafore(t_table *table);
+long					get_current_time(void);
+
+void					write_status(t_philos *philo, char *s3, int flag);
 
 #endif
