@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_one.h                                        :+:      :+:    :+:   */
+/*   philo_two.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkathryn <fkathryn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/15 20:41:26 by fkathryn          #+#    #+#             */
-/*   Updated: 2020/11/20 02:57:30 by fkathryn         ###   ########.fr       */
+/*   Created: 2020/11/19 20:52:21 by fkathryn          #+#    #+#             */
+/*   Updated: 2020/11/20 02:57:44 by fkathryn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_ONE_H
-# define PHILO_ONE_H
+#ifndef PHILO_TWO_H
+# define PHILO_TWO_H
 
 # include <pthread.h>
-# include <stdlib.h>
-# include <unistd.h>
+# include <semaphore.h>
 # include <sys/time.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
 
 typedef struct			s_table {
 	int					number_of_philos;
@@ -26,11 +28,11 @@ typedef struct			s_table {
 	int					number_of_times_each_philosopher_must_eat;
 	long				start_time;
 	int					someone_died;
-	pthread_t			*thread_philos;
-	pthread_mutex_t		*fork;
-	pthread_mutex_t		*mutex_time;
-	pthread_mutex_t		*mutex_write;
-	pthread_mutex_t		*mutex_death;
+	sem_t				*sem_fork;
+	sem_t				*sem_time;
+	sem_t				*sem_write;
+	sem_t				*sem_death;
+	sem_t				*sem_waiter;
 }						t_table;
 
 typedef struct			s_philos {
@@ -44,23 +46,9 @@ typedef struct			s_philos {
 ** condition_philo.c
 */
 
+void					eating(t_philos *philo);
 void					sleeping(t_philos *philo);
 void					thinking(t_philos *philo);
-void					eating(t_philos *philo);
-
-/*
-** init.c
-*/
-
-int						table_init(t_table *table, char **av);
-void					philos_and_forks_init(t_table *table, t_philos *philos);
-void					philo_init(t_philos *philos, int i, t_table *table);
-
-/*
-** main.c
-*/
-
-void					write_status(t_philos *philo, char *s3, int flag);
 
 /*
 ** check_param.c
@@ -70,21 +58,30 @@ int						print_error(char *str);
 int						check_param(t_table *table);
 
 /*
+** init.c
+*/
+
+int						table_init(t_table *table, char **av);
+void					philo_init(t_philos *philos, int i, t_table *table);
+
+/*
+** libft_utils.c
+*/
+
+size_t					ft_strlen(const char *s);
+char					*ft_itoa(long n);
+char					*ft_strjoin(char *s1, char *s2, char *s3);
+int						ft_atoi(const char *nptr);
+
+/*
 ** utils.c
 */
 
-long					get_current_time(void);
-void					free_table(t_table *table);
+int						open_semafore(t_table *table);
 void					ft_usleep(long sec);
-int						another_fork(int fork_id, int philos);
+void					close_semafore(t_table *table);
+long					get_current_time(void);
 
-/*
-** utils_libft.c
-*/
-
-int						ft_atoi(const char *nptr);
-char					*ft_strjoin(char *s1, char *s2, char *s3);
-char					*ft_itoa(long n);
-size_t					ft_strlen(const char *s);
+void					write_status(t_philos *philo, char *s3, int flag);
 
 #endif

@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkathryn <fkathryn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/15 23:26:31 by fkathryn          #+#    #+#             */
-/*   Updated: 2020/11/16 19:53:40 by fkathryn         ###   ########.fr       */
+/*   Created: 2020/11/19 21:49:34 by fkathryn          #+#    #+#             */
+/*   Updated: 2020/11/20 02:46:32 by fkathryn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+#include "../philo_two.h"
 
-void	philo_init(t_philos *philos, int i, t_table *table)
+void		philo_init(t_philos *philos, int i, t_table *table)
 {
 	philos->philo_id = i;
 	philos->number_of_times_each_philosopher_must_eat =
@@ -21,21 +21,9 @@ void	philo_init(t_philos *philos, int i, t_table *table)
 	philos->last_eat = table->start_time;
 }
 
-void	philos_and_forks_init(t_table *table, t_philos *philos)
+static void	init_table_param(t_table *table, char **av)
 {
-	int i;
-
-	i = 0;
-	while (i < table->number_of_philos)
-	{
-		philo_init(&philos[i], i, table);
-		pthread_mutex_init(&table->fork[i], NULL);
-		++i;
-	}
-}
-
-void	table_init(t_table *table, char **av)
-{
+	table->someone_died = 0;
 	table->number_of_philos = ft_atoi(av[1]);
 	table->time_to_die = ft_atoi(av[2]);
 	table->time_to_eat = ft_atoi(av[3]);
@@ -44,10 +32,19 @@ void	table_init(t_table *table, char **av)
 		table->number_of_times_each_philosopher_must_eat = ft_atoi(av[5]);
 	else
 		table->number_of_times_each_philosopher_must_eat = -1;
-	if (!(table->mutex_time = malloc(sizeof(pthread_mutex_t))))
-		return ;
-	if (!(table->mutex_write = malloc(sizeof(pthread_mutex_t))))
-		return ;
-	pthread_mutex_init(table->mutex_time, NULL);
-	pthread_mutex_init(table->mutex_write, NULL);
+}
+
+int			table_init(t_table *table, char **av)
+{
+	sem_unlink("time");
+	sem_unlink("write");
+	sem_unlink("death");
+	sem_unlink("waiter");
+	sem_unlink("fork");
+	init_table_param(table, av);
+	if (!(check_param(table)))
+		return (print_error("check the parameters\n"));
+	if (!(open_semafore(table)))
+		return (0);
+	return (1);
 }

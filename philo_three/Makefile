@@ -5,17 +5,17 @@
 #                                                     +:+ +:+         +:+      #
 #    By: fkathryn <fkathryn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/11/15 23:44:43 by fkathryn          #+#    #+#              #
-#    Updated: 2020/11/19 20:40:08 by fkathryn         ###   ########.fr        #
+#    Created: 2020/11/20 02:56:19 by fkathryn          #+#    #+#              #
+#    Updated: 2020/11/20 02:56:37 by fkathryn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philo_one
+NAME = philo_three
 
-INCLUDE = philo_one.h
+INCLUDE = philo_three.h
 
-SRCS = srcs/main.c srcs/init.c srcs/utils.c srcs/utils_libft.c \
-		 srcs/condition_philo.c srcs/check_param.c 
+SRCS = srcs/main.c srcs/utils.c srcs/libft_utils.c  \
+		srcs/init.c srcs/condition_philo.c srcs/check_param.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_libft.c                                      :+:      :+:    :+:   */
+/*   libft_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkathryn <fkathryn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/16 00:24:21 by fkathryn          #+#    #+#             */
-/*   Updated: 2020/11/16 02:27:05 by fkathryn         ###   ########.fr       */
+/*   Created: 2020/11/19 21:40:40 by fkathryn          #+#    #+#             */
+/*   Updated: 2020/11/20 02:46:43 by fkathryn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+#include "../philo_two.h"
+
+size_t		ft_strlen(const char *s)
+{
+	size_t len;
+
+	len = 0;
+	while (*s++ != '\0')
+		len++;
+	return (len);
+}
 
 static int	ft_size(int n)
 {
@@ -28,16 +38,6 @@ static int	ft_size(int n)
 		n /= 10;
 	}
 	return (size);
-}
-
-size_t		ft_strlen(const char *s)
-{
-	size_t len;
-
-	len = 0;
-	while (*s++ != '\0')
-		len++;
-	return (len);
 }
 
 char		*ft_itoa(long n)
