@@ -6,7 +6,7 @@
 /*   By: fkathryn <fkathryn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 02:55:55 by fkathryn          #+#    #+#             */
-/*   Updated: 2020/11/20 21:42:49 by fkathryn         ###   ########.fr       */
+/*   Updated: 2020/11/21 18:40:17 by fkathryn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	write_status(t_philos *philo, char *s3, int flag)
 	str = ft_strjoin(s1, s2, s3);
 	free(s1);
 	free(s2);
+	sem_wait(philo->table->sem_death);
 	if (!philo->table->someone_died)
 		write(1, str, ft_strlen(str));
 	if (flag != 1)
@@ -47,12 +48,12 @@ void	*check_death(void *arg)
 	sem_post(philo->table->sem_time);
 	if (philo->number_of_times_each_philosopher_must_eat)
 	{
+		sem_wait(philo->table->sem_time);
 		write_status(philo, " died\n", 1);
 		philo->table->someone_died = 1;
-		sem_post(philo->table->sem_death);
 		sem_post(philo->table->sem_philo_died);
 	}
-	sem_post(philo->table->sem_death);
+	sem_post(philo->table->sem_philo_died);
 	return (NULL);
 }
 
@@ -86,6 +87,7 @@ void	forks_create(t_table *table)
 	int			i;
 
 	i = 0;
+	sem_wait(table->sem_philo_died);
 	table->start_time = get_current_time();
 	while (i < table->number_of_philos)
 	{

@@ -6,7 +6,7 @@
 /*   By: fkathryn <fkathryn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 17:21:49 by fkathryn          #+#    #+#             */
-/*   Updated: 2020/11/19 20:40:11 by fkathryn         ###   ########.fr       */
+/*   Updated: 2020/11/20 15:56:52 by fkathryn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		print_error(char *str)
 
 int		check_param(t_table *table)
 {
-	if (table->number_of_philos <= 0)
+	if (table->number_of_philos <= 1)
 		return (0);
 	if (table->time_to_die <= 0)
 		return (0);

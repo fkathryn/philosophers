@@ -6,19 +6,18 @@
 /*   By: fkathryn <fkathryn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 02:56:14 by fkathryn          #+#    #+#             */
-/*   Updated: 2020/11/20 21:44:13 by fkathryn         ###   ########.fr       */
+/*   Updated: 2020/11/21 18:25:18 by fkathryn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_TWO_H
-# define PHILO_TWO_H
+#ifndef PHILO_THREE_H
+# define PHILO_THREE_H
 
 # include <pthread.h>
 # include <semaphore.h>
 # include <sys/time.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include <signal.h>
 
 typedef struct			s_table {
@@ -33,7 +32,6 @@ typedef struct			s_table {
 	sem_t				*sem_time;
 	sem_t				*sem_write;
 	sem_t				*sem_death;
-	// sem_t				*sem_waiter;
 	sem_t				*sem_philo_died;
 }						t_table;
 
@@ -80,8 +78,8 @@ int						ft_atoi(const char *nptr);
 */
 
 int						open_semafore(t_table *table);
-void					ft_usleep(long sec);
 void					close_semafore(t_table *table);
+void					ft_usleep(long sec);
 long					get_current_time(void);
 
 void					write_status(t_philos *philo, char *s3, int flag);

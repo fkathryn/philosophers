@@ -6,7 +6,7 @@
 /*   By: fkathryn <fkathryn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 16:23:19 by fkathryn          #+#    #+#             */
-/*   Updated: 2020/11/20 21:44:25 by fkathryn         ###   ########.fr       */
+/*   Updated: 2020/11/21 17:40:37 by fkathryn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int		open_semafore(t_table *table)
 		return (0);
 	if ((table->sem_death = sem_open("death", O_CREAT, NULL, 1)) == SEM_FAILED)
 		return (0);
-	// if ((table->sem_waiter = sem_open("waiter", O_CREAT, NULL,\
-	// 	1)) == SEM_FAILED)
-		// return (0);
+	if ((table->sem_philo_died = sem_open("philo_died", O_CREAT, NULL,\
+		1)) == SEM_FAILED)
+		return (0);
 	return (1);
 }
 
@@ -43,7 +43,7 @@ void	close_semafore(t_table *table)
 	sem_close(table->sem_time);
 	sem_close(table->sem_write);
 	sem_close(table->sem_death);
-	// sem_close(table->sem_waiter);
+	sem_close(table->sem_philo_died);
 	sem_close(table->sem_fork);
 }
 
