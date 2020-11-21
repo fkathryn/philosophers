@@ -6,7 +6,7 @@
 /*   By: fkathryn <fkathryn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 02:56:14 by fkathryn          #+#    #+#             */
-/*   Updated: 2020/11/21 18:25:18 by fkathryn         ###   ########.fr       */
+/*   Updated: 2020/11/21 22:07:16 by fkathryn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct			s_table {
 	sem_t				*sem_fork;
 	sem_t				*sem_time;
 	sem_t				*sem_write;
+	sem_t				*sem_waiter;
 	sem_t				*sem_death;
 	sem_t				*sem_philo_died;
 }						t_table;

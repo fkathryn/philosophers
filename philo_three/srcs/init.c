@@ -6,7 +6,7 @@
 /*   By: fkathryn <fkathryn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 16:20:30 by fkathryn          #+#    #+#             */
-/*   Updated: 2020/11/21 18:23:15 by fkathryn         ###   ########.fr       */
+/*   Updated: 2020/11/21 22:08:35 by fkathryn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int			table_init(t_table *table, char **av)
 	sem_unlink("time");
 	sem_unlink("write");
 	sem_unlink("death");
+	sem_unlink("waiter");
 	sem_unlink("philo_died");
 	sem_unlink("fork");
 	init_table_param(table, av);
